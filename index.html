@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>No Buy 2025 Quiz</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+            transition: all 0.3s ease-in-out;
+        }
+        .container {
+            max-width: 600px;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 25px;
+            border-radius: 15px;
+            margin: auto;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+        }
+        h1 {
+            font-size: 28px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        .quiz-question {
+            font-size: 22px;
+            margin: 20px 0;
+            font-weight: bold;
+        }
+        .quiz-options button {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: none;
+            background: linear-gradient(45deg, #ff416c, #ff4b2b);
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s ease-in-out;
+        }
+        .quiz-options button:hover {
+            background: linear-gradient(45deg, #ff6a88, #ff7e5f);
+            transform: scale(1.05);
+        }
+        #result {
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 20px;
+            color: yellow;
+        }
+        .btn {
+            display: inline-block;
+            margin: 12px;
+            padding: 14px 22px;
+            font-size: 18px;
+            font-weight: bold;
+            text-transform: uppercase;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .know-more {
+            background: linear-gradient(45deg, #007bff, #0056b3);
+        }
+        .subscribe {
+            background: linear-gradient(45deg, #ff0000, #cc0000);
+        }
+        .btn:hover {
+            transform: scale(1.1);
+        }
+        #timer {
+            font-size: 22px;
+            font-weight: bold;
+            color: yellow;
+            margin-top: 15px;
+            animation: pulse 1s infinite;
+        }
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.7; }
+            100% { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>🚀 No Buy 2025 Quiz 🚀</h1>
+        <p>Think you can survive a year without unnecessary spending? Take the challenge! 💰</p>
+
+        <div class="quiz-question" id="question">
+            Loading question...
+        </div>
+
+        <div id="timer">⏳ Time Left: 30s</div>
+
+        <div class="quiz-options" id="options"></div>
+
+        <div id="result"></div>
+
+        <br>
+        <button class="btn know-more" onclick="window.location.href='https://ryancarterz.wordpress.com/2025/03/02/no-buy-2025-movements/'">🔍 Know More</button>
+        <button class="btn subscribe" onclick="window.location.href='https://youtube.com/@ryanquiz-k7n'">📢 Subscribe</button>
+    </div>
+
+    <script>
+        const quizData = [
+            {
+                question: "What is the main goal of the 'No Buy 2025' challenge?",
+                options: ["Save Money", "Declutter Life", "Reduce Waste", "All of the Above"],
+                answer: "All of the Above"
+            },
+            {
+                question: "Which category is most commonly excluded in No Buy challenges?",
+                options: ["Clothing & Accessories", "Groceries", "Rent", "Medical Expenses"],
+                answer: "Clothing & Accessories"
+            },
+            {
+                question: "What is a great alternative to buying new clothes?",
+                options: ["DIY Projects", "Clothing Swaps", "Reusing Old Clothes", "All of the Above"],
+                answer: "All of the Above"
+            }
+        ];
+
+        let currentQuestion = 0;
+        let score = 0;
+        let timeLeft = 30;
+        let timer;
+
+        function loadQuiz() {
+            if (currentQuestion < quizData.length) {
+                document.getElementById("question").innerText = quizData[currentQuestion].question;
+                document.getElementById("options").innerHTML = "";
+                quizData[currentQuestion].options.forEach(option => {
+                    let button = document.createElement("button");
+                    button.innerText = option;
+                    button.onclick = () => checkAnswer(option);
+                    document.getElementById("options").appendChild(button);
+                });
+                resetTimer();
+            } else {
+                document.getElementById("question").innerText = "🎉 Quiz Completed! 🎉";
+                document.getElementById("options").innerHTML = "";
+                document.getElementById("result").innerText = `You scored ${score} out of ${quizData.length}! 🏆`;
+                clearInterval(timer);
+            }
+        }
+
+        function checkAnswer(selected) {
+            if (selected === quizData[currentQuestion].answer) {
+                score++;
+            }
+            currentQuestion++;
+            loadQuiz();
+        }
+
+        function resetTimer() {
+            clearInterval(timer);
+            timeLeft = 30;
+            document.getElementById("timer").innerText = `⏳ Time Left: ${timeLeft}s`;
+            timer = setInterval(() => {
+                timeLeft--;
+                document.getElementById("timer").innerText = `⏳ Time Left: ${timeLeft}s`;
+                if (timeLeft === 0) {
+                    clearInterval(timer);
+                    currentQuestion++;
+                    loadQuiz();
+                }
+            }, 1000);
+        }
+
+        loadQuiz();
+    </script>
+
+</body>
+</html>
